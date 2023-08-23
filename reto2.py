@@ -1,25 +1,39 @@
-"""
-Dado dos diccionarios 1 de productos y el 2 de categoría, conocer un 3 que permita tener el nombre del
-producto y el nombre de su categoria ejemplo.
-"""
+products = [
+    {
+        "id": 123,
+        "name": "Notebook",
+        "price": 12.500,
+        "cat_id": 1
+    },
+    {
+        "id": 124,
+        "name": "Soap",
+        "price": 10.500,
+        "cat_id": 2
+    }
+]
 
-products = {
-    "Producto A": 10,
-    "Producto B": 20,
-    "Producto C": 15,
-    "Producto D": 32,
-}
+categories = [
+    {
+        "id": 1,
+        "name": "School Supplies",
+    },
+    {
+        "id": 2,
+        "name": "Cleaning",
+    }
+]
 
-categories = {
-    "Categoría X": ["Producto A", "Producto B"],
-    "Categoría Y": ["Producto C"],
-}
+product_category_relation = {}
 
-product_category = {}
+id_to_category_name = {cat["id"]: cat["name"] for cat in categories}
 
-for category, product_list in categories.items():
-    for product in product_list:
-        product_category[product] = category
+for product in products:
+    product_name = product["name"]
+    category_id = product["cat_id"]
+    category_name = id_to_category_name.get(category_id, "Category not found")
+    
+    product_category_relation[product_name] = category_name
 
-for product, category in product_category.items():
-    print(f"Producto: {product}, Categoría: {category}")
+for product, category in product_category_relation.items():
+    print(f"Product: {product}, Category: {category}")
